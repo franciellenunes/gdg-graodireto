@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <!-- CLOSE BUTTON -->
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="closeModal()">
+        <ion-icon name="close" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- / CLOSE BUTTON -->
+    <ion-title>Informações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed no-padding>
+    <form [formGroup]="form">
+      <ion-row>
+        <ion-col size="12" padding>
+          <ion-list>
+            <!-- NAME -->
+            <ion-item>
+              <ion-label position="stacked">Nome:</ion-label>
+              <ion-input
+                formControlName="name"
+                inputmode="text"
+                placeholder="Ex..: Joe Doe"
+                value="{{ name }}"
+              ></ion-input>
+            </ion-item>
+            <!-- / NAME -->
+            <!-- EMAIL -->
+            <ion-item>
+              <ion-label position="stacked">Email:</ion-label>
+              <ion-input
+                formControlName="email"
+                inputmode="email"
+                placeholder="Ex.: joe@doe.com"
+                value="{{ email }}"
+              ></ion-input>
+            </ion-item>
+            <!-- EMAIL -->
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <!-- ACTIONS BUTTONS -->
+      <ion-row text-center>
+        <ion-col size="12" padding>
+          <ion-button color="success" [disabled]="!form.valid"
+            ><ion-icon slot="icon-only" name="save"></ion-icon
+          ></ion-button>
+          <ion-button
+            color="danger"
+            *ngIf="this.action == 'update'"
+            [disabled]="!form.valid"
+          >
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <!-- / ACTIONS BUTTONS -->
+    </form>
+  </ion-grid>
+</ion-content>

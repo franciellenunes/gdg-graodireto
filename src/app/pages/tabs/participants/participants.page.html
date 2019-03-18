@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Participantes
+    </ion-title>
+  </ion-toolbar>
+
+  <!-- ADD BUTTON -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark" (click)="openModalToCreate()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <!-- / ADD BUTTON -->
+</ion-header>
+
+<ion-content>
+  <!-- PERSON CARD -->
+  <ion-card (click)="openModalToUpdate()">
+    <ion-card-header>
+      <ion-card-title>Francielle da Silva Nunes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="mail"></ion-icon>
+        <ion-label>franciellesnunes@gmail.com</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <!-- / PERSON CARD -->
+</ion-content>
