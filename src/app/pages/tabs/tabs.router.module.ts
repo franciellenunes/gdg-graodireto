@@ -19,25 +19,25 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'participants',
+        path: 'books',
         children: [
           {
             path: '',
             loadChildren:
-              './participants/participants.module#ParticipantsPageModule'
+              './books/books.module#BooksPageModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/participants',
+        redirectTo: '/tabs/books',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/participants',
+    redirectTo: '/tabs/books',
     pathMatch: 'full'
   }
 ];

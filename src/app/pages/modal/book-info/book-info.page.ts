@@ -4,11 +4,11 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-participant-info',
-  templateUrl: './participant-info.page.html',
-  styleUrls: ['./participant-info.page.scss']
+  selector: 'app-book-info',
+  templateUrl: './book-info.page.html',
+  styleUrls: ['./book-info.page.scss']
 })
-export class ParticipantInfoPage implements OnInit {
+export class BookInfoPage implements OnInit {
   @Input() name: string;
   @Input() email: string;
   @Input() action: string;

@@ -5,15 +5,15 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ParticipantsPage } from './participants.page';
+import { BooksPage } from './books.page';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: ParticipantsPage }])
+    RouterModule.forChild([{ path: '', component: BooksPage }])
   ],
-  declarations: [ParticipantsPage]
+  declarations: [BooksPage]
 })
-export class ParticipantsPageModule {}
+export class BooksPageModule {}

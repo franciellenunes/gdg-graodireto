@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ParticipantInfoPageModule } from './pages/modal/participant-info/participant-info.module';
+import { BookInfoPageModule } from './pages/modal/book-info/book-info.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +20,7 @@ import { ParticipantInfoPageModule } from './pages/modal/participant-info/partic
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ParticipantInfoPageModule
+    BookInfoPageModule
   ],
   providers: [
     StatusBar,
