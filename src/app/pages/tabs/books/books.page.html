@@ -15,17 +15,17 @@
 </ion-header>
 
 <ion-content>
-  <!-- PERSON CARD -->
-  <ion-card (click)="openModalToUpdate()">
+  <!-- BOOK CARD -->
+  <ion-card (click)="openModalToUpdate(book)" *ngFor="let book of arrBooks">
     <ion-card-header>
-      <ion-card-title>Francielle da Silva Nunes</ion-card-title>
+      <ion-card-title>{{ book.title }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-icon slot="start" color="medium" name="mail"></ion-icon>
-        <ion-label>franciellesnunes@gmail.com</ion-label>
+        <ion-icon slot="start" color="medium" name="book"></ion-icon>
+        <ion-label>{{ book.email }}</ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <!-- / PERSON CARD -->
+  <!-- / BOOK CARD -->
 </ion-content>

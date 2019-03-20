@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
-import { ModalController, LoadingController } from '@ionic/angular';
+import {
+  ModalController,
+  LoadingController,
+  ToastController
+} from '@ionic/angular';
 
 import { BookInfoPage } from '../../modal/book-info/book-info.page';
 import { BooksService } from 'src/app/services/books.service';
@@ -14,7 +18,7 @@ export class BooksPage {
   isLoading = false;
   loading;
 
-  name: String = 'Francielle';
+  title: String = 'Francielle';
   email: String = 'francielle@gmail.com';
 
   arrBooks = [];
@@ -22,29 +26,14 @@ export class BooksPage {
   constructor(
     private modalCtrl: ModalController,
     private booksService: BooksService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    public toastController: ToastController
   ) {
     this.getBooks();
     this.loading = this.loadingController.create({
       message: 'Carregando..',
       spinner: 'crescent'
     });
-  }
-
-  private openModalToCreate() {
-    this.openModal('', '', 'create');
-  }
-
-  private openModalToUpdate() {
-    this.openModal(this.name, this.email, 'update');
-  }
-
-  async openModal(name: String, email: String, action: String) {
-    const modal = await this.modalCtrl.create({
-      component: BookInfoPage,
-      componentProps: { name: name, email: email, action: action }
-    });
-    return await modal.present();
   }
 
   async getBooks() {
@@ -55,8 +44,7 @@ export class BooksPage {
     await loading.present();
     return await this.booksService.getBooks().subscribe(
       res => {
-        console.log(res);
-        this.arrBooks = res;
+        this.arrBooks = res.data;
         loading.dismiss();
       },
       err => {
@@ -64,5 +52,49 @@ export class BooksPage {
         loading.dismiss();
       }
     );
+  }
+
+  openModalToCreate() {
+    this.presentModal('', '', 'create', undefined);
+  }
+
+  openModalToUpdate(book: number) {
+    this.presentModal(book['title'], book['email'], 'update', book['id']);
+  }
+
+  async presentModal(
+    title: String,
+    email: String,
+    action: String,
+    bookID?: any
+  ) {
+    const modal = await this.modalCtrl.create({
+      component: BookInfoPage,
+      componentProps: {
+        title: title,
+        email: email,
+        action: action,
+        bookID: bookID
+      }
+    });
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    if (data.message !== '' && data.message !== undefined) {
+      this.presentToast(data.message, data.color);
+      this.getBooks();
+    }
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      showCloseButton: true,
+      position: 'bottom',
+      duration: 2000,
+      color: color,
+      closeButtonText: 'Fechar'
+    });
+    await toast.present();
   }
 }

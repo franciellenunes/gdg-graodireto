@@ -19,22 +19,22 @@
           <ion-list>
             <!-- TITLE -->
             <ion-item>
-              <ion-label position="stacked">Nome:</ion-label>
+              <ion-label position="stacked">Título:</ion-label>
               <ion-input
-                formControlName="name"
+                formControlName="title"
                 inputmode="text"
-                placeholder="Ex..: Joe Doe"
-                value="{{ name }}"
+                placeholder="Ex..: Livro A"
+                value="{{ title }}"
               ></ion-input>
             </ion-item>
             <!-- / TITLE -->
             <!-- EMAIL -->
             <ion-item>
-              <ion-label position="stacked">Email:</ion-label>
+              <ion-label position="stacked">Tipo:</ion-label>
               <ion-input
                 formControlName="email"
                 inputmode="email"
-                placeholder="Ex.: joe@doe.com"
+                placeholder="Ex.: joedue@email.com"
                 value="{{ email }}"
               ></ion-input>
             </ion-item>
@@ -45,13 +45,17 @@
       <!-- ACTIONS BUTTONS -->
       <ion-row text-center>
         <ion-col size="12" padding>
-          <ion-button color="success" [disabled]="!form.valid"
+          <ion-button
+            color="success"
+            [disabled]="!form.valid"
+            (click)="save()"
             ><ion-icon slot="icon-only" name="save"></ion-icon
           ></ion-button>
           <ion-button
             color="danger"
             *ngIf="this.action == 'update'"
             [disabled]="!form.valid"
+            (click)="deleteBook()"
           >
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-button>

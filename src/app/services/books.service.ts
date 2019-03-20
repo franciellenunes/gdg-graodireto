@@ -9,16 +9,10 @@ import {
 } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
-const apiUrl = 'https://places.demo.api.here.com/places/v1/categories/places?';
-const at = '41.8369,-87.684';
-const app_id = '6i8UJD2Jzh6osVBpUWvU';
-const app_code = 'BOv0STjZJcFQke1elIBfvQ';
+const apiUrl =
+  'https://ptefyqkqw5.execute-api.sa-east-1.amazonaws.com/dev/books';
 
-const headers = new HttpHeaders({ Accept: 'application/json' });
-const params = new HttpParams()
-  .set('at', at)
-  .set('app_id', app_id)
-  .set('app_code', app_code);
+const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 @Injectable({
   providedIn: 'root'
@@ -43,30 +37,37 @@ export class BooksService {
   }
 
   getBooks(): Observable<any> {
-    return this.http.get(apiUrl, { headers: headers, params: params }).pipe(
+    return this.http.get(apiUrl, { headers: headers }).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );
   }
 
-  postBook(data): Observable<any> {
-    const url = `${apiUrl}/add_book`;
+  getBook(id: number): Observable<any> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.get(url, { headers: headers }).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  postBook(data: any): Observable<any> {
     return this.http
-      .post(url, data, { headers: headers, params: params })
+      .post(apiUrl, data, { headers: headers })
       .pipe(catchError(this.handleError));
   }
 
-  updateBook(id: string, data): Observable<any> {
+  updateBook(id: number, data: any): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http
-      .put(url, data, { headers: headers, params: params })
+      .put(url, data, { headers: headers })
       .pipe(catchError(this.handleError));
   }
 
-  deleteBook(id: string): Observable<{}> {
+  deleteBook(id: number): Observable<{}> {
     const url = `${apiUrl}/${id}`;
     return this.http
-      .delete(url, { headers: headers, params: params })
+      .delete(url, { headers: headers })
       .pipe(catchError(this.handleError));
   }
 }
