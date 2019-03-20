@@ -23,8 +23,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren:
-              './books/books.module#BooksPageModule'
+            loadChildren: './books/books.module#BooksPageModule'
           }
         ]
       },

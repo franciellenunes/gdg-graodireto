@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
   ModalController,
@@ -14,12 +14,9 @@ import { BooksService } from 'src/app/services/books.service';
   templateUrl: 'books.page.html',
   styleUrls: ['books.page.scss']
 })
-export class BooksPage {
+export class BooksPage implements OnInit {
   isLoading = false;
-  loading;
-
-  title: String = 'Francielle';
-  email: String = 'francielle@gmail.com';
+  private loading;
 
   arrBooks = [];
 
@@ -28,7 +25,9 @@ export class BooksPage {
     private booksService: BooksService,
     private loadingController: LoadingController,
     public toastController: ToastController
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.getBooks();
     this.loading = this.loadingController.create({
       message: 'Carregando..',
@@ -80,7 +79,7 @@ export class BooksPage {
     await modal.present();
 
     const { data } = await modal.onDidDismiss();
-    if (data.message !== '' && data.message !== undefined) {
+    if (data.message !== '' && data.message !== undefined && data.message !== null) {
       this.presentToast(data.message, data.color);
       this.getBooks();
     }
